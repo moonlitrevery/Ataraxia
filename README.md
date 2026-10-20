@@ -1,2 +1,2 @@
 # Ataraxia
-app web-like pessoal pra tirar os reels do instagram pra não cair no doomscrolling diário
+app web-like pessoal pra tirar os videos da rede social vertical pra não cair no doomscrolling diário
