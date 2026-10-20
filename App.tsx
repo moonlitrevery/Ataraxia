@@ -3,6 +3,7 @@ import { Linking } from 'react-native'
 import { SafeAreaProvider, SafeAreaView } from 'react-native-safe-area-context'
 import { WebView } from 'react-native-webview'
 import type { ShouldStartLoadRequest } from 'react-native-webview/lib/WebViewTypes'
+import inject from './src/inject'
 
 // o instagram serve uma versão pior do site pra UA de webview
 const ua =
@@ -28,6 +29,7 @@ export default function App() {
           allowsBackForwardNavigationGestures
           pullToRefreshEnabled
           onShouldStartLoadWithRequest={shouldLoad}
+          injectedJavaScript={inject}
           style={{ backgroundColor: '#000' }}
         />
       </SafeAreaView>
