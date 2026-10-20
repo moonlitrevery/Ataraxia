@@ -1,0 +1,15 @@
+{
+  "expo": {
+    "name": "Ataraxia",
+    "slug": "ataraxia",
+    "version": "1.0.0",
+    "platforms": ["ios"],
+    "orientation": "portrait",
+    "userInterfaceStyle": "dark",
+    "ios": {
+      "bundleIdentifier": "com.moonlitrevery.ataraxia",
+      "supportsTablet": false
+    },
+    "plugins": ["expo-status-bar"]
+  }
+}
