@@ -1,0 +1,44 @@
+name: ios
+
+on:
+  push:
+    branches: [main]
+  workflow_dispatch:
+
+jobs:
+  build:
+    runs-on: macos-latest
+    steps:
+      - uses: actions/checkout@v7
+
+      - uses: actions/setup-node@v7
+        with:
+          node-version: lts/*
+          cache: npm
+
+      - run: npm ci
+
+      - run: npx expo prebuild --platform ios --no-install
+
+      - run: pod install
+        working-directory: ios
+
+      # sem assinatura aqui: o sideloadly assina com o apple id na hora de instalar
+      - run: >
+          xcodebuild archive
+          -workspace ios/Ataraxia.xcworkspace
+          -scheme Ataraxia
+          -configuration Release
+          -destination generic/platform=iOS
+          -archivePath build/Ataraxia.xcarchive
+          CODE_SIGNING_ALLOWED=NO
+
+      - run: |
+          mkdir Payload
+          cp -R build/Ataraxia.xcarchive/Products/Applications/Ataraxia.app Payload/
+          zip -qr Ataraxia.ipa Payload
+
+      - uses: actions/upload-artifact@v7
+        with:
+          name: Ataraxia
+          path: Ataraxia.ipa
